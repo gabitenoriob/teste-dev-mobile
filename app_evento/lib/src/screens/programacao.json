@@ -1,0 +1,197 @@
+{
+    "horarios": [
+        {
+            "id": 324417,
+            "data_atividade": "2099-03-25T00:00:00+00:00",
+            "hora_inicio": "2023-11-07T08:00:00-03:00",
+            "hora_fim": "2023-11-07T09:00:00-03:00",
+            "atividade_id": 306319,
+            "atividade": {
+                "id": 306319,
+                "nome": "Fundamentos e Princípios do Direito Civil Brasileiro",
+                "descricao": "<p>Fundamentos e Princípios do Direito Civil Brasileiro</p>\r\n",
+                "local": "Sala 2",
+                "bloco": {
+                    "id": 3251,
+                    "nome": "Tributário",
+                    "ordem": 3251,
+                    "cor": "#0ef0dd"
+                },
+                "lista_palestrantes": ""
+            }
+        },
+        {
+            "id": 324421,
+            "data_atividade": "2099-03-26T00:00:00+00:00",
+            "hora_inicio": "2023-11-07T09:00:00-03:00",
+            "hora_fim": "2023-11-07T10:00:00-03:00",
+            "atividade_id": 59091,
+            "atividade": {
+                "id": 59091,
+                "nome": "Ética, direito e sociedade: um panorama mais geral",
+                "descricao": "<p>Aqui você deve inserir os detalhes da atividade Ética, direito e sociedade: um panorama geral.</p>\r\n",
+                "local": "Sala 2",
+                "bloco": {
+                    "id": 3253,
+                    "nome": "Trabalhista ",
+                    "ordem": 3253,
+                    "cor": "#78fa76"
+                },
+                "lista_palestrantes": "Palestrante 2, Palestrante 5",
+                "palestrantes": [
+                    {
+                        "id": 21450,
+                        "nome": "Palestrante 2",
+                        "empresa": "Empresa da Palestrante",
+                        "descricao": "<p>Uma breve descri&ccedil;&atilde;o desta palestrante e da palestra que ela ir&aacute; ministrar no evento</p>\r\n",
+                        "imagem": "https://doity.com.br/media/doity/palestrantes/21450_palestrante.png",
+                        "ordem": 21450
+                    },
+                    {
+                        "id": 21454,
+                        "nome": "Palestrante 5",
+                        "empresa": "Empresa da Palestrante",
+                        "descricao": "<p>Uma breve descri&ccedil;&atilde;o desta palestrante e da palestra que ela&nbsp;ir&aacute; ministrar no evento</p>\r\n",
+                        "imagem": "https://doity.com.br/media/doity/palestrantes/21454_palestrante.png",
+                        "ordem": 21454
+                    }
+                ]
+            }
+        },
+        {
+            "id": 324418,
+            "data_atividade": "2099-03-25T00:00:00+00:00",
+            "hora_inicio": "2023-11-07T10:00:00-03:00",
+            "hora_fim": "2023-11-07T11:00:00-03:00",
+            "atividade_id": 121568,
+            "atividade": {
+                "id": 121568,
+                "nome": "Direito Privado e sua importância.",
+                "descricao": "<p>Direito Privado  é o ordenamento jurídico que rege os interesses particulares. Questões como patrimônio familiar e sucessões são matéria do <strong>Direito Privado</strong>, que está dividido entre o <strong>Direito</strong> Civil e o <strong>Direito </strong>Empresarial. </p>\r\n",
+                "local": "Auditório 1",
+                "bloco": {
+                    "id": 3249,
+                    "nome": "Civil",
+                    "ordem": 3249,
+                    "cor": "#f08bf0"
+                },
+                "lista_palestrantes": ""
+            }
+        },
+        {
+            "id": 324419,
+            "data_atividade": "2099-03-25T00:00:00+00:00",
+            "hora_inicio": "2023-11-07T11:00:00-03:00",
+            "hora_fim": "2023-11-07T12:00:00-03:00",
+            "atividade_id": 59090,
+            "atividade": {
+                "id": 59090,
+                "nome": "Direito Sucessório do cônjuge e suas controvérsias",
+                "descricao": "<p>Aqui você insere os detalhes da palestra Direito Sucessório do cônjuge e suas controvérsias</p>\r\n",
+                "local": "Sala 1",
+                "bloco": {
+                    "id": 3253,
+                    "nome": "Trabalhista ",
+                    "ordem": 3253,
+                    "cor": "#78fa76"
+                },
+                "lista_palestrantes": "Palestrante 1",
+                "palestrantes": [
+                    {
+                        "id": 21449,
+                        "nome": "Palestrante 1",
+                        "empresa": "Empresa do Palestrante",
+                        "descricao": "<p>Uma breve descri&ccedil;&atilde;o deste palestrante e da palestra que ele ir&aacute; ministrar no evento</p>\r\n",
+                        "imagem": "https://doity.com.br/media/doity/palestrantes/21449_palestrante.png",
+                        "ordem": 21449
+                    }
+                ]
+            }
+        },
+        {
+            "id": 324422,
+            "data_atividade": "2099-03-26T00:00:00+00:00",
+            "hora_inicio": "2023-11-07T11:00:00-03:00",
+            "hora_fim": "2023-11-07T12:00:00-03:00",
+            "atividade_id": 59093,
+            "atividade": {
+                "id": 59093,
+                "nome": "Responsabilidade Civil no Direito de Família",
+                "descricao": "<p>Informações da palestra Responsabilidade Civil no Direito de Família.</p>\r\n",
+                "local": "Sala 1",
+                "bloco": null,
+                "lista_palestrantes": "Palestrante 4",
+                "palestrantes": [
+                    {
+                        "id": 21452,
+                        "nome": "Palestrante 4",
+                        "empresa": "Empresa do Palestrante",
+                        "descricao": "<p>Uma breve descri&ccedil;&atilde;o deste palestrante e da palestra que ele ir&aacute; ministrar no evento</p>\r\n",
+                        "imagem": "https://doity.com.br/media/doity/palestrantes/21452_palestrante.png",
+                        "ordem": 21452
+                    }
+                ]
+            }
+        },
+        {
+            "id": 324420,
+            "data_atividade": "2099-03-25T00:00:00+00:00",
+            "hora_inicio": "2023-11-07T14:00:00-03:00",
+            "hora_fim": "2023-11-07T15:00:00-03:00",
+            "atividade_id": 59092,
+            "atividade": {
+                "id": 59092,
+                "nome": "O novo código do processo civil",
+                "descricao": "<p>Aqui você deve inserir informações sobre a palestra O novo código do processo civil.</p>\r\n",
+                "local": "Sala 1",
+                "bloco": {
+                    "id": 3251,
+                    "nome": "Tributário",
+                    "ordem": 3251,
+                    "cor": "#0ef0dd"
+                },
+                "lista_palestrantes": "Palestrante 3",
+                "palestrantes": [
+                    {
+                        "id": 21451,
+                        "nome": "Palestrante 3",
+                        "empresa": "Empresa da Palestrante",
+                        "descricao": "<p>Uma breve descri&ccedil;&atilde;o desta palestrante e da palestra que ela ir&aacute; ministrar no evento</p>\r\n",
+                        "imagem": "https://doity.com.br/media/doity/palestrantes/21451_palestrante.png",
+                        "ordem": 21451
+                    }
+                ]
+            }
+        },
+        {
+            "id": 324423,
+            "data_atividade": "2099-03-25T00:00:00+00:00",
+            "hora_inicio": "2023-11-07T18:00:00-03:00",
+            "hora_fim": "2023-11-07T19:00:00-03:00",
+            "atividade_id": 306320,
+            "atividade": {
+                "id": 306320,
+                "nome": "Direitos Reais: Aspectos Contemporâneos e Polêmicas Jurídicas",
+                "descricao": "<p>Direitos Reais: Aspectos Contemporâneos e Polêmicas Jurídicas</p>\r\n",
+                "local": "Sala 3",
+                "bloco": {
+                    "id": 3249,
+                    "nome": "Civil",
+                    "ordem": 3249,
+                    "cor": "#f08bf0"
+                },
+                "lista_palestrantes": "Palestrante 6",
+                "palestrantes": [
+                    {
+                        "id": 21455,
+                        "nome": "Palestrante 6",
+                        "empresa": "Empresa do Palestrante",
+                        "descricao": "<p>Uma breve descri&ccedil;&atilde;o deste palestrante e da palestra que ele ir&aacute; ministrar no evento</p>\r\n",
+                        "imagem": "https://doity.com.br/media/doity/palestrantes/21455_palestrante.png",
+                        "ordem": 21455
+                    }
+                ]
+            }
+        }
+    ]
+}
