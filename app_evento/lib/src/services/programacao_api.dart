@@ -1,75 +1,39 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 
-class Programacao {
-  final List<Atividade> horarios;
+import 'package:app_evento/src/http/exceptions.dart';
+import 'package:app_evento/src/http/http_client.dart';
+import 'package:app_evento/src/models/programacao_model.dart';
 
-  Programacao({required this.horarios});
-
-  factory Programacao.fromJson(Map<String, dynamic> json) {
-    final List<dynamic> horarios = json['horarios'];
-    return Programacao(
-      horarios: horarios.map((data) => Atividade.fromJson(data)).toList(),
-    );
-  }
+abstract class IProgramacao {
+  Future<List<Horarios>> getProgramacao();
 }
 
-class Atividade {
-  final String nome;
-  final String descricao;
+class Programacao implements IProgramacao {
+  final IHttpClient client;
 
-  Atividade({required this.nome, required this.descricao});
-
-  factory Atividade.fromJson(Map<String, dynamic> json) {
-    return Atividade(
-      nome: json['nome'],
-      descricao: json['descricao'],
-    );
-  }
-
-  get data_atividade => null;
-
-  get atividades => null;
-}
-
-class ApiService {
-  final String baseUrl =
-      'https://api.doity.com.br/public/aplicativos/v2/eventos/24043/atividades_horarios';
-
-  Future<Programacao> fetchProgramacao() async {
-    final response = await http.get(Uri.parse(
-        '$baseUrl?sort=hora_inicio&direction=ASC&limit=200&d_rdhid=59c654f003e03cb1f34fb921af330a24cb619c99'));
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return Programacao.fromJson(data);
-    } else {
-      throw ApiRequestException(
-          'Falha na solicitação: ${response.reasonPhrase}');
-    }
-  }
-}
-
-class ApiRequestException implements Exception {
-  final String message;
-
-  ApiRequestException(this.message);
+  Programacao({required this.client});
 
   @override
-  String toString() {
-    return 'ApiRequestException: $message';
-  }
-}
+  Future<List<Horarios>> getProgramacao() async {
+    final response = await client.get(
+        url:
+            'https://api.doity.com.br/public/aplicativos/v2/eventos/24043/atividades_horarios?sort=hora_inicio&direction=ASC&limit=200&d_rdhid=59c654f003e03cb1f34fb921af330a24cb619c99');
 
-void main() async {
-  final apiService = ApiService();
+    if (response.statusCode == 200) {
+      final List<Horarios> horarios = [];
 
-  try {
-    final programacao = await apiService.fetchProgramacao();
-    // Use os dados da programação conforme necessário
-    print(programacao.horarios[0].nome);
-    print(programacao.horarios[0].descricao);
-  } catch (e) {
-    print(e);
+      final body = jsonDecode(response.body);
+
+      body['horarios'].map((item) {
+        final Horarios horario = Horarios.fromMap(item);
+        horarios.add(horario);
+      }).toList();
+
+      return horarios;
+    } else if (response.statusCode == 404) {
+      throw NotFoundException("A url informada não é válida");
+    } else {
+      throw Exception("Não foi possivel carregar");
+    }
   }
 }
