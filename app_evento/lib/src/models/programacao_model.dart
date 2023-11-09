@@ -18,11 +18,11 @@ class Horarios {
   factory Horarios.fromMap(Map<String, dynamic> map) {
     return Horarios(
       id: map['id'],
-      dataAtividade: map['dataAtividade'],
-      horaInicio: map['horaInicio'],
-      horaFim: map['horaFim'],
+      dataAtividade: map['data _atividade'],
+      horaInicio: map['hora_inicio'],
+      horaFim: map['hora_fim'],
       atividade: Atividade.fromMap(map['atividade']), // Mapeia a atividade
-      idAtividade: map['idAtividade'],
+      idAtividade: map['atividade_id'],
     );
   }
 }
@@ -47,13 +47,24 @@ class Atividade {
   factory Atividade.fromMap(Map<String, dynamic> map) {
     return Atividade(
       id: map['id'],
-      nome: map['nome'],
-      descricao: map['descricao'],
-      local: map['local'],
-      bloco: Bloco.fromMap(map['bloco']), // Mapeia o bloco
-      palestrantes: (map['palestrantes'] as List)
-          .map((palestranteData) => Palestrante.fromMap(palestranteData))
-          .toList(), // Mapeia a lista de palestrantes
+      nome: map['nome'] ?? "Nome não disponível",
+      descricao: map['descricao'] ?? "Descrição não disponível",
+      local: map['local'] ?? "Local não disponível",
+      bloco: Bloco.fromMap(
+          map['bloco'] ?? {}), // Passa um mapa vazio se bloco for nulo
+      palestrantes: (map['lista_palestrantes'] as List? ?? []).isEmpty
+          ? [
+              Palestrante(
+                  id: 0,
+                  nome: "Sem Palestrantes",
+                  empresa: "",
+                  descricao: "",
+                  imagem: "",
+                  ordem: 0)
+            ]
+          : (map['palestrantes'] as List)
+              .map((palestranteData) => Palestrante.fromMap(palestranteData))
+              .toList(),
     );
   }
 }
