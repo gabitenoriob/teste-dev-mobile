@@ -1,26 +1,8 @@
-import 'package:app_evento/src/http/http_client.dart';
-import 'package:app_evento/src/services/programacao_api.dart';
-import 'package:app_evento/src/stores/programacao_store.dart';
+import 'package:app_evento/src/screens/parceiros_page.dart';
+import 'package:app_evento/src/screens/programacao_page.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final ProgramacaoStore store =
-      ProgramacaoStore(programacao: Programacao(client: HttpClient()));
-
-  @override
-  void initState() {
-    super.initState();
-    //aq tb
-    store.getHorarios();
-  }
-
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,97 +16,33 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: AnimatedBuilder(
-        animation: Listenable.merge([
-          store.erro,
-          store.isloading,
-          store.state,
-        ]),
-        builder: (context, child) {
-          if (store.isloading.value) {
-            return Center(child: const CircularProgressIndicator());
-          }
-          if (store.erro.value.isNotEmpty) {
-            return Center(
-              child: Text(
-                store.erro.value,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProgramacaoPage(),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            );
-          }
-
-          if (store.state.value.isEmpty) {
-            return Center(
-              child: Text(
-                'Nenhum item na lista',
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
+              );
+            },
+            child: Text('Programação'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ParceirosPage(),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            );
-          } else {
-            return ListView.separated(
-              separatorBuilder: (context, index) => const SizedBox(
-                height: 32,
-              ),
-              padding: const EdgeInsets.all(16),
-              itemCount: store.state.value.length,
-              itemBuilder: (_, index) {
-                final item = store.state.value[index];
-                return Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    //FALTA POR MAIS DETALHES
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(
-                        item.atividade.nome,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 24,
-                        ),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.atividade.descricao,
-                            style: const TextStyle(
-                              color: Colors.blueAccent,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            item.dataAtividade,
-                            style: const TextStyle(
-                                color: Colors.blueAccent,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                );
-              },
-            );
-          }
-        },
+              );
+            },
+            child: Text('Parceiros'),
+          ),
+        ],
       ),
     );
   }

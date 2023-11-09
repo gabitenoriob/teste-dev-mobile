@@ -21,14 +21,15 @@ class Programacao implements IProgramacao {
 
     if (response.statusCode == 200) {
       final List<Horarios> horarios = [];
-
+      
+      //decodificando o json
       final body = jsonDecode(response.body);
 
       body['horarios'].map((item) {
         final Horarios horario = Horarios.fromMap(item);
+        // nao passa daqui 
         horarios.add(horario);
       }).toList();
-
       return horarios;
     } else if (response.statusCode == 404) {
       throw NotFoundException("A url informada não é válida");

@@ -32,16 +32,16 @@ class Atividade {
   final String nome;
   final String descricao;
   final String local;
-  final Bloco bloco;
-  List<Palestrante> palestrantes;
+  final Bloco? bloco;
+  List<Palestrante>? palestrantes;
 
   Atividade({
     required this.id,
     required this.nome,
     required this.descricao,
     required this.local,
-    required this.bloco,
-    required this.palestrantes,
+    this.bloco,
+    this.palestrantes,
   });
 
   factory Atividade.fromMap(Map<String, dynamic> map) {
@@ -50,8 +50,7 @@ class Atividade {
       nome: map['nome'] ?? "Nome não disponível",
       descricao: map['descricao'] ?? "Descrição não disponível",
       local: map['local'] ?? "Local não disponível",
-      bloco: Bloco.fromMap(
-          map['bloco'] ?? {}), // Passa um mapa vazio se bloco for nulo
+      bloco: map['bloco'] ?? "Bloco nao especificado",
       palestrantes: (map['lista_palestrantes'] as List? ?? []).isEmpty
           ? [
               Palestrante(
@@ -70,16 +69,16 @@ class Atividade {
 }
 
 class Bloco {
-  final int id;
-  final String nome;
-  final int ordem;
-  final String cor;
+  final int? id;
+  final String? nome;
+  final int? ordem;
+  final String? cor;
 
   Bloco({
-    required this.id,
-    required this.nome,
-    required this.ordem,
-    required this.cor,
+    this.id,
+    this.nome,
+    this.ordem,
+    this.cor,
   });
 
   factory Bloco.fromMap(Map<String, dynamic> map) {
@@ -93,20 +92,20 @@ class Bloco {
 }
 
 class Palestrante {
-  final int id;
-  final String nome;
-  final String empresa;
-  final String descricao;
-  final String imagem;
-  final int ordem;
+  final int? id;
+  final String? nome;
+  final String? empresa;
+  final String? descricao;
+  final String? imagem;
+  final int? ordem;
 
   Palestrante({
-    required this.id,
-    required this.nome,
-    required this.empresa,
-    required this.descricao,
-    required this.imagem,
-    required this.ordem,
+    this.id,
+    this.nome,
+    this.empresa,
+    this.descricao,
+    this.imagem,
+    this.ordem,
   });
 
   factory Palestrante.fromMap(Map<String, dynamic> map) {
