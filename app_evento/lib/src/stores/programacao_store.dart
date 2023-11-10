@@ -1,6 +1,6 @@
 import 'package:app_evento/src/http/exceptions.dart';
 import 'package:app_evento/src/models/programacao_model.dart';
-import 'package:app_evento/src/services/programacao_api.dart';
+import 'package:app_evento/src/apis/programacao_api.dart';
 import 'package:flutter/material.dart';
 
 class ProgramacaoStore {
@@ -23,7 +23,7 @@ class ProgramacaoStore {
     isloading.value = true;
     try {
       final result = await programacao.getProgramacao();
-      state.value = result;
+      state.value = result; //da dando empty
     } on NotFoundException catch (e) {
       erro.value = e.message;
     } catch (e) {

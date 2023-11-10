@@ -27,7 +27,7 @@ class Programacao implements IProgramacao {
 
       body['horarios'].map((item) {
         final Horarios horario = Horarios.fromMap(item);
-        // nao passa daqui 
+        // nao passa daqui ai ta dando empty pq n ta adicionando na lista 
         horarios.add(horario);
       }).toList();
       return horarios;

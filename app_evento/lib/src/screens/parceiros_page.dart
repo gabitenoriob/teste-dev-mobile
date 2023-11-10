@@ -1,5 +1,5 @@
 import 'package:app_evento/src/http/http_client.dart';
-import 'package:app_evento/src/services/parceiros_api.dart';
+import 'package:app_evento/src/apis/parceiros_api.dart';
 import 'package:flutter/material.dart';
 import 'package:app_evento/src/stores/parceiros_store.dart';
 
@@ -16,6 +16,10 @@ class ParceirosPage extends StatelessWidget {
         parceirosStore.state,
       ]),
       builder: (context, child) {
+        print('IsLoading: ${parceirosStore.isloading.value}');
+        print('Erro: ${parceirosStore.erro.value}');
+        print('State Length: ${parceirosStore.state.value?.length}');
+
         if (parceirosStore.isloading.value) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -33,7 +37,7 @@ class ParceirosPage extends StatelessWidget {
           );
         }
 
-        if (parceirosStore.state.value.isEmpty) {
+        if (parceirosStore.state.value!.isEmpty) {
           return Center(
             child: Text(
               'Nenhum item na lista de parceiros',
@@ -51,50 +55,61 @@ class ParceirosPage extends StatelessWidget {
               height: 32,
             ),
             padding: const EdgeInsets.all(16),
-            itemCount: parceirosStore.state.value.length,
+            itemCount: parceirosStore.state.value!.length,
             itemBuilder: (_, index) {
-              final item = parceirosStore.state.value[index];
-              return Column(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      item.imagem,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 24,
-                      ),
+              final item = parceirosStore.state.value?[index];
+
+              if (item != null) {
+                final imagem = item.imagem;
+                final categoriaDescricao = item.categoria.descricao.toString();
+                final url = item.url;
+
+                return Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.categoria.descricao.toString(),
-                          style: const TextStyle(
-                            color: Colors.blueAccent,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                          ),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(
+                        imagem,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24,
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          item.url,
-                          style: const TextStyle(
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            categoriaDescricao,
+                            style: const TextStyle(
+                              color: Colors.blueAccent,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            url,
+                            style: const TextStyle(
                               color: Colors.blueAccent,
                               fontWeight: FontWeight.w400,
-                              fontSize: 18),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              );
+                              fontSize: 18,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                );
+              } else {
+                // Lógica para lidar com um item nulo, se necessário.
+                return SizedBox.shrink(); // ou outro widget vazio ou padrão
+              }
             },
           );
         }

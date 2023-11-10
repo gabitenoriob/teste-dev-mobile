@@ -1,5 +1,5 @@
 import 'package:app_evento/src/http/http_client.dart';
-import 'package:app_evento/src/services/programacao_api.dart';
+import 'package:app_evento/src/apis/programacao_api.dart';
 import 'package:flutter/material.dart';
 import 'package:app_evento/src/stores/programacao_store.dart';
 
