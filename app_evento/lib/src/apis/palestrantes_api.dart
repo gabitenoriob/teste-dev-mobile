@@ -36,12 +36,12 @@ class Palestrante implements IPalestrantes {
             palestrantes.add(palestrante);
             print('Parceiro adicionado: $palestrante');
           } catch (e) {
-            print('Erro ao criar Parceiros a partir do JSON: $e');
+            print('Erro ao criar Palestrantes a partir do JSON: $e');
           }
         }
         print('Lista de parceiros após o loop: $palestrantes');
       } else {
-        print('Não encontrou a chave "parceiros" na resposta.');
+        print('Não encontrou a chave "palestrantes" na resposta.');
       }
 
       return palestrantes;

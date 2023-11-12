@@ -8,19 +8,16 @@ class ParceirosPage extends StatefulWidget {
   _ParceirosPageState createState() => _ParceirosPageState();
 }
 
-//gerencia o estado
 class _ParceirosPageState extends State<ParceirosPage> {
   final ParceirosStore parceirosStore =
       ParceirosStore(parceiros: Parceiro(client: HttpClient()));
 
-//inicialização
   @override
   void initState() {
     super.initState();
     parceirosStore.getParceiros();
   }
 
-//tela
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,45 +68,61 @@ class _ParceirosPageState extends State<ParceirosPage> {
                 final item = parceirosStore.state.value?[index];
 
                 if (item != null) {
-                  final imagemURL = item.imagem;
-                  final categoriaDescricao =
-                      item.categoria.descricao.toString();
+                  final imagem = item.imagem;
+                  final categoriaDescricao = item.categoria.descricao;
                   final url = item.url;
 
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white, // Cor de fundo da "caixa"
+                      borderRadius:
+                          BorderRadius.circular(16), // Borda arredondada
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 4,
+                          offset: Offset(0, 2), // Sombra
+                        ),
+                      ],
+                    ),
+                    padding: const EdgeInsets.all(16), // Espaçamento interno
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
                           borderRadius: BorderRadius.circular(16),
                           child: Center(
                             child: Image.network(
-                              imagemURL, // Carrega a imagem a partir da URL
-                              width: 100, // Largura da imagem
-                              height: 100, // Altura da imagem
+                              imagem,
+                              width: 100,
+                              height: 100,
                               fit: BoxFit.cover,
                             ),
-                          )),
-                      const SizedBox(height: 8),
-                      Text(
-                        categoriaDescricao,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 24,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        url,
-                        style: const TextStyle(
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 18,
+                        const SizedBox(height: 8),
+                        Text(
+                          categoriaDescricao,
+                          style: const TextStyle(
+                            color: Colors.blueAccent,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 24,
+                          ),
                         ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Text(
+                          url,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
+                      ],
+                    ),
                   );
                 } else {
                   return SizedBox.shrink();

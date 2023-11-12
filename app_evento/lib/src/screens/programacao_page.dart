@@ -21,97 +21,108 @@ class _ProgramacaoPageState extends State<ProgramacaoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: AnimatedBuilder(
-      animation: Listenable.merge([
-        programacaoStore.erro,
-        programacaoStore.isloading,
-        programacaoStore.state,
-      ]),
-      builder: (context, child) {
-        if (programacaoStore.isloading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (programacaoStore.erro.value.isNotEmpty) {
-          return Center(
-            child: Text(
-              programacaoStore.erro.value,
-              style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 20,
+      body: AnimatedBuilder(
+        animation: Listenable.merge([
+          programacaoStore.erro,
+          programacaoStore.isloading,
+          programacaoStore.state,
+        ]),
+        builder: (context, child) {
+          if (programacaoStore.isloading.value) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (programacaoStore.erro.value.isNotEmpty) {
+            return Center(
+              child: Text(
+                programacaoStore.erro.value,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-          );
-        }
-        if (programacaoStore.state.value.isEmpty) {
-          return Center(
-            child: Text(
-              'Nenhum item na lista de programação',
-              style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 20,
+            );
+          }
+          if (programacaoStore.state.value.isEmpty) {
+            return Center(
+              child: Text(
+                'Nenhum item na lista de programação',
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-          );
-        } else {
-          return ListView.separated(
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 32,
-            ),
-            padding: const EdgeInsets.all(16),
-            itemCount: programacaoStore.state.value!.length,
-            itemBuilder: (_, index) {
-              final item = programacaoStore.state.value?[index];
-
-              if (item != null) {
-                final atividade = item.atividade.toString();
-                final nomeAtividade = item.atividade.nome.toString();
+            );
+          } else {
+            return ListView.builder(
+              itemCount: programacaoStore.state.value!.length,
+              itemBuilder: (context, index) {
+                final item = programacaoStore.state.value![index];
+                final atividade = item.atividade;
+                final nomeAtividade = item.atividade.nome;
                 final descricaoAtividade = item.atividade.descricao;
+                final horaAtividade = item.horaInicio;
+                final dataAtividade = item.dataAtividade;
+                final localAtividade = item.atividade.local.toString();
+                final listaPalestrantes = item.listaPalestrantes;
 
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                   const SizedBox(height: 8),
-                    Text(
-                      atividade,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 24,
-                      ),
+                return Card(
+                  // Adiciona um Card para criar a caixa em torno do item
+                  margin:
+                      const EdgeInsets.all(16), // Define uma margem para o Card
+                  child: Padding(
+                    // Adiciona um Padding para adicionar espaçamento interno
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          nomeAtividade,
+                          style: const TextStyle(
+                            color: Colors.blueAccent,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 24,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Data: $horaAtividade',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        /*Text(
+                          'Data: $dataAtividade',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),*/
+                        const SizedBox(height: 8),
+                        Text(
+                          'Local: $localAtividade',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      nomeAtividade,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 24,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      descricaoAtividade,
-                      style: const TextStyle(
-                        color: Colors.blueAccent,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
-                  ],
+                  ),
                 );
-              } else {
-                return SizedBox.shrink();
-              }
-            },
-          );
-        }
-      },
-    ));
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 }

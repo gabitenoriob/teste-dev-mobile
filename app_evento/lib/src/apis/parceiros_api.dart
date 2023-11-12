@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:app_evento/src/http/exceptions.dart';
 import 'package:app_evento/src/http/http_client.dart';
 import 'package:app_evento/src/models/paceiros_model.dart';

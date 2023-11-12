@@ -1,3 +1,4 @@
+
 import 'package:app_evento/src/models/notificacao_model.dart';
 
 class Conteudo {
@@ -68,3 +69,6 @@ class Icone {
     );
   }
 }
+
+
+

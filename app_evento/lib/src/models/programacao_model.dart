@@ -5,6 +5,7 @@ class Horarios {
   final String horaFim;
   final int idAtividade;
   Atividade atividade;
+  final String? listaPalestrantes;
 
   Horarios({
     required this.id,
@@ -13,17 +14,18 @@ class Horarios {
     required this.horaFim,
     required this.atividade,
     required this.idAtividade,
+    this.listaPalestrantes,
   });
 
   factory Horarios.fromJson(Map<String, dynamic> json) {
     return Horarios(
-      id: json['id'],
-      dataAtividade: json['data _atividade'] ?? " ",
-      horaInicio: json['hora_inicio'],
-      horaFim: json['hora_fim'],
-      atividade: Atividade.fromJson(json['atividade']), // Mapeia a atividade
-      idAtividade: json['atividade_id'],
-    );
+        id: json['id'],
+        dataAtividade: json['data _atividade'] ?? " ",
+        horaInicio: json['hora_inicio'],
+        horaFim: json['hora_fim'],
+        atividade: Atividade.fromJson(json['atividade']), // Mapeia a atividade
+        idAtividade: json['atividade_id'],
+        listaPalestrantes: json['lista_palestrantes'] ?? " ");
   }
 }
 
