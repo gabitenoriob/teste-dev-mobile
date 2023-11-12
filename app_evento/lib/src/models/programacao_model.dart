@@ -18,7 +18,7 @@ class Horarios {
   factory Horarios.fromJson(Map<String, dynamic> json) {
     return Horarios(
       id: json['id'],
-      dataAtividade: json['data _atividade'],
+      dataAtividade: json['data _atividade'] ?? " ",
       horaInicio: json['hora_inicio'],
       horaFim: json['hora_fim'],
       atividade: Atividade.fromJson(json['atividade']), // Mapeia a atividade
@@ -50,20 +50,10 @@ class Atividade {
       nome: json['nome'] ?? "Nome não disponível",
       descricao: json['descricao'] ?? "Descrição não disponível",
       local: json['local'] ?? "Local não disponível",
-      bloco: json['bloco'] ?? "Bloco nao especificado",
-      palestrantes: (json['lista_palestrantes'] as List? ?? []).singleOrNull
-          ? [
-              Palestrante(
-                  id: 0,
-                  nome: "Sem Palestrantes",
-                  empresa: "",
-                  descricao: "",
-                  imagem: "",
-                  ordem: 0)
-            ]
-          : (json['palestrantes'] as List)
-              .map((palestrantes) => Palestrante.fromJson(palestrantes))
-              .toList(),
+      bloco: json['bloco'] != null ? Bloco.fromMap(json['bloco']) : null,
+      palestrantes: (json['palestrantes'] as List? ?? [])
+          .map((palestrantes) => Palestrante.fromJson(palestrantes))
+          .toList(),
     );
   }
 }

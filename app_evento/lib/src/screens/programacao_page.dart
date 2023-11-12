@@ -44,7 +44,6 @@ class _ProgramacaoPageState extends State<ProgramacaoPage> {
             ),
           );
         }
-        // AS PAGINAS TAO VINDO P CA
         if (programacaoStore.state.value.isEmpty) {
           return Center(
             child: Text(
@@ -63,50 +62,52 @@ class _ProgramacaoPageState extends State<ProgramacaoPage> {
               height: 32,
             ),
             padding: const EdgeInsets.all(16),
-            itemCount: programacaoStore.state.value.length,
+            itemCount: programacaoStore.state.value!.length,
             itemBuilder: (_, index) {
-              final item = programacaoStore.state.value[index];
-              return Column(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      item.atividade.nome,
+              final item = programacaoStore.state.value?[index];
+
+              if (item != null) {
+                final atividade = item.atividade.toString();
+                final nomeAtividade = item.atividade.nome.toString();
+                final descricaoAtividade = item.atividade.descricao;
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                   const SizedBox(height: 8),
+                    Text(
+                      atividade,
                       style: const TextStyle(
-                        color: Colors.pink,
+                        color: Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: 24,
                       ),
                     ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.atividade.descricao,
-                          style: const TextStyle(
-                            color: Colors.blueAccent,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          item.dataAtividade,
-                          style: const TextStyle(
-                              color: Colors.blueAccent,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 18),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        )
-                      ],
+                    const SizedBox(height: 8),
+                    Text(
+                      nomeAtividade,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 24,
+                      ),
                     ),
-                  )
-                ],
-              );
+                    const SizedBox(height: 4),
+                    Text(
+                      descricaoAtividade,
+                      style: const TextStyle(
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                  ],
+                );
+              } else {
+                return SizedBox.shrink();
+              }
             },
           );
         }
