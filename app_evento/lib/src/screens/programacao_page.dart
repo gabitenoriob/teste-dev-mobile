@@ -70,11 +70,11 @@ class _ProgramacaoPageState extends State<ProgramacaoPage> {
                 final listaPalestrantes = item.listaPalestrantes;
 
                 return Card(
-                  // Adiciona um Card para criar a caixa em torno do item
+                
                   margin:
-                      const EdgeInsets.all(16), // Define uma margem para o Card
+                      const EdgeInsets.all(16),
                   child: Padding(
-                    // Adiciona um Padding para adicionar espaçamento interno
+                    
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

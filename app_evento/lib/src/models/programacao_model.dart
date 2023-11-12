@@ -23,7 +23,7 @@ class Horarios {
         dataAtividade: json['data _atividade'] ?? " ",
         horaInicio: json['hora_inicio'],
         horaFim: json['hora_fim'],
-        atividade: Atividade.fromJson(json['atividade']), // Mapeia a atividade
+        atividade: Atividade.fromJson(json['atividade']), 
         idAtividade: json['atividade_id'],
         listaPalestrantes: json['lista_palestrantes'] ?? " ");
   }

@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     loadImage();
   }
 
+//gerando imagem da home
   Future<void> loadImage() async {
     final response = await http.get(Uri.parse(
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9uBCZIGEtt5x_8lqHg_n8ZQO8rGn4HgrfaWx3za623-BCV6YYSxQjU_1U_iE5nukGlLc&usqp=CAU'));
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: Icon(Icons.menu),
             onPressed: () {
-              // Implemente a ação para abrir o menu aqui
+              // menu..
             },
           ),
         ],
@@ -48,19 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           GestureDetector(
-            onTap: () {
-              // Implemente a ação para quando a imagem for clicada aqui
-            },
             child: Container(
               width: double.infinity,
-              height: 280, // Ajuste a altura conforme necessário
+              height: 280,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9uBCZIGEtt5x_8lqHg_n8ZQO8rGn4HgrfaWx3za623-BCV6YYSxQjU_1U_iE5nukGlLc&usqp=CAU',
                   ),
-                  fit: BoxFit
-                      .cover, // Redimensiona a imagem para cobrir toda a área
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -75,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
-                      padding: EdgeInsets.all(30.0), // Cor de fundo azul
+                      padding: EdgeInsets.all(30.0),
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -90,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
-                      padding: EdgeInsets.all(30.0), // Cor de fundo azul
+                      padding: EdgeInsets.all(30.0),
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -105,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
-                      padding: EdgeInsets.all(30.0), // Cor de fundo azul
+                      padding: EdgeInsets.all(30.0),
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -130,59 +127,23 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               icon: Icon(Icons.phone),
               onPressed: () {
-                // Implemente a ação para mostrar informações de contato aqui
+                // Iredes sociais do conteudo
               },
             ),
             IconButton(
               icon: Icon(Icons.email),
               onPressed: () {
-                // Implemente a ação para mostrar informações de e-mail aqui
+                // conteudo
               },
             ),
             IconButton(
               icon: Icon(Icons.location_on),
               onPressed: () {
-                // Implemente a ação para mostrar informações de localização aqui
+                // conteudo
               },
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class HomeButton extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final VoidCallback onPressed;
-
-  HomeButton({
-    required this.title,
-    required this.icon,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            size: 50,
-            color: Colors.blue, // Personalize a cor do ícone
-          ),
-          SizedBox(height: 10),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ),
     );
   }

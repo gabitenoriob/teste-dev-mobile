@@ -74,19 +74,19 @@ class _ParceirosPageState extends State<ParceirosPage> {
 
                   return Container(
                     decoration: BoxDecoration(
-                      color: Colors.white, // Cor de fundo da "caixa"
+                      color: Colors.white, 
                       borderRadius:
-                          BorderRadius.circular(16), // Borda arredondada
+                          BorderRadius.circular(16), 
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 1,
                           blurRadius: 4,
-                          offset: Offset(0, 2), // Sombra
+                          offset: Offset(0, 2), 
                         ),
                       ],
                     ),
-                    padding: const EdgeInsets.all(16), // Espaçamento interno
+                    padding: const EdgeInsets.all(16), 
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
