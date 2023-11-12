@@ -4,12 +4,12 @@ class Parceiros {
   final String? descricao;
   final String url;
   final String imagem;
-  final Categoria categoria;
+  Categoria categoria;
 
   Parceiros({
     required this.id,
     required this.ordem,
-    this.descricao,
+     this.descricao,
     required this.url,
     required this.imagem,
     required this.categoria,
@@ -19,10 +19,10 @@ class Parceiros {
     return Parceiros(
       id: json['id'],
       ordem: json['ordem'],
-      descricao: json['descricao'] ?? " ",
+      descricao: json['descricao'] ?? " " ,
       url: json['url'],
       imagem: json['imagem'],
-      categoria: Categoria.fromJson(json['categoria']),
+      categoria: Categoria.fromMap(json['categoria']),
     );
   }
 }
@@ -30,25 +30,25 @@ class Parceiros {
 class Categoria {
   final int id;
   final int ordem;
-  final String? descricao;
-  final bool mostrarSite;
-  final bool mostrarDoityPlay;
+  final String descricao;
+  final bool mostrar_site;
+  final bool mostrar_doity_play;
 
   Categoria({
     required this.id,
     required this.ordem,
-    this.descricao,
-    required this.mostrarDoityPlay,
-    required this.mostrarSite,
+     required this.descricao,
+    required this.mostrar_doity_play,
+    required this.mostrar_site,
   });
 
-  factory Categoria.fromJson(Map<String, dynamic> json) {
+  factory Categoria.fromMap(Map<String, dynamic> map) {
     return Categoria(
-      id: json['id'],
-      ordem: json['ordem'],
-      descricao: json['descricao'] ?? " ",
-      mostrarDoityPlay: json['mostrar_doity_play'],
-      mostrarSite: json['mostrar_site_evento'],
+      id: map['id'],
+      ordem: map['ordem'],
+      descricao: map['descricao'] ,
+      mostrar_doity_play: map['mostrar_doity_play'],
+      mostrar_site: map['mostrar_site_evento'],
     );
   }
 }

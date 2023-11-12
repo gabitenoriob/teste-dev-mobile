@@ -1,3 +1,4 @@
+import 'package:app_evento/src/screens/palestrantes_page.dart';
 import 'package:app_evento/src/screens/parceiros_page.dart';
 import 'package:app_evento/src/screens/programacao_page.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,17 @@ class HomeScreen extends StatelessWidget {
               );
             },
             child: Text('Parceiros'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PalestrantesPage(),
+                ),
+              );
+            },
+            child: Text('Palestrantes'),
           ),
         ],
       ),

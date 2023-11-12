@@ -25,7 +25,7 @@ class Parceiro implements IParceiros {
 
       // Decodificando o JSON
       final dynamic body = jsonDecode(response.body);
-      print('Conteúdo da resposta: $body'); // Adicione este log
+      print('Conteúdo da resposta: $body');
 
       if (body is Map && body.containsKey('parceiros')) {
         print('Entrou no bloco if');

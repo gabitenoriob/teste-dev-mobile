@@ -1,43 +1,42 @@
+import 'package:app_evento/src/apis/palestrantes_api.dart';
 import 'package:app_evento/src/http/http_client.dart';
 import 'package:app_evento/src/apis/parceiros_api.dart';
+import 'package:app_evento/src/stores/palestrantes_store.dart';
 import 'package:flutter/material.dart';
 import 'package:app_evento/src/stores/parceiros_store.dart';
 
-class ParceirosPage extends StatefulWidget {
+class PalestrantesPage extends StatefulWidget {
   @override
-  _ParceirosPageState createState() => _ParceirosPageState();
+  _PalestrantesPageState createState() => _PalestrantesPageState();
 }
 
-//gerencia o estado
-class _ParceirosPageState extends State<ParceirosPage> {
-  final ParceirosStore parceirosStore =
-      ParceirosStore(parceiros: Parceiro(client: HttpClient()));
+class _PalestrantesPageState extends State<PalestrantesPage> {
+  final PalestrantesStore palestrantesStore =
+      PalestrantesStore(palestrantes: Palestrante(client: HttpClient()));
 
-//inicialização
   @override
   void initState() {
     super.initState();
-    parceirosStore.getParceiros();
+    palestrantesStore.getPalestrantes();
   }
 
-//tela
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBuilder(
         animation: Listenable.merge([
-          parceirosStore.erro,
-          parceirosStore.isloading,
-          parceirosStore.state,
+          palestrantesStore.erro,
+          palestrantesStore.isloading,
+          palestrantesStore.state,
         ]),
         builder: (context, child) {
-          if (parceirosStore.isloading.value) {
+          if (palestrantesStore.isloading.value) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (parceirosStore.erro.value.isNotEmpty) {
+          if (palestrantesStore.erro.value.isNotEmpty) {
             return Center(
               child: Text(
-                parceirosStore.erro.value,
+                palestrantesStore.erro.value,
                 style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
@@ -48,7 +47,7 @@ class _ParceirosPageState extends State<ParceirosPage> {
             );
           }
 
-          if (parceirosStore.state.value.isEmpty) {
+          if (palestrantesStore.state.value!.isEmpty) {
             return Center(
               child: Text(
                 'Nenhum item na lista de parceiros',
@@ -66,15 +65,14 @@ class _ParceirosPageState extends State<ParceirosPage> {
                 height: 32,
               ),
               padding: const EdgeInsets.all(16),
-              itemCount: parceirosStore.state.value!.length,
+              itemCount: palestrantesStore.state.value!.length,
               itemBuilder: (_, index) {
-                final item = parceirosStore.state.value?[index];
+                final item = palestrantesStore.state.value?[index];
 
                 if (item != null) {
                   final imagemURL = item.imagem;
-                  final categoriaDescricao =
-                      item.categoria.descricao.toString();
-                  final url = item.url;
+                  final descricao = item.descricao.toString();
+                  final empresa = item.empresa;
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +89,7 @@ class _ParceirosPageState extends State<ParceirosPage> {
                           )),
                       const SizedBox(height: 8),
                       Text(
-                        categoriaDescricao,
+                        descricao,
                         style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
@@ -100,7 +98,7 @@ class _ParceirosPageState extends State<ParceirosPage> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        url,
+                        empresa,
                         style: const TextStyle(
                           color: Colors.blueAccent,
                           fontWeight: FontWeight.w400,

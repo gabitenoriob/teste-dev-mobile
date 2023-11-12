@@ -10,7 +10,8 @@ class ParceirosStore {
   final ValueNotifier<bool> isloading = ValueNotifier<bool>(false);
 
   // state
-  final ValueNotifier<List<Parceiros>> state = ValueNotifier<List<Parceiros>>([]);
+  final ValueNotifier<List<Parceiros>> state =
+      ValueNotifier<List<Parceiros>>([]);
 
   // erro
   final ValueNotifier<String> erro = ValueNotifier<String>('');

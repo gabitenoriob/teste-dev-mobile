@@ -15,14 +15,14 @@ class Horarios {
     required this.idAtividade,
   });
 
-  factory Horarios.fromMap(Map<String, dynamic> map) {
+  factory Horarios.fromJson(Map<String, dynamic> json) {
     return Horarios(
-      id: map['id'],
-      dataAtividade: map['data _atividade'],
-      horaInicio: map['hora_inicio'],
-      horaFim: map['hora_fim'],
-      atividade: Atividade.fromMap(map['atividade']), // Mapeia a atividade
-      idAtividade: map['atividade_id'],
+      id: json['id'],
+      dataAtividade: json['data _atividade'],
+      horaInicio: json['hora_inicio'],
+      horaFim: json['hora_fim'],
+      atividade: Atividade.fromJson(json['atividade']), // Mapeia a atividade
+      idAtividade: json['atividade_id'],
     );
   }
 }
@@ -33,7 +33,7 @@ class Atividade {
   final String descricao;
   final String local;
   final Bloco? bloco;
-  List<Palestrante>? palestrantes;
+  List<Palestrante> palestrantes;
 
   Atividade({
     required this.id,
@@ -41,17 +41,17 @@ class Atividade {
     required this.descricao,
     required this.local,
     this.bloco,
-    this.palestrantes,
+    required this.palestrantes,
   });
 
-  factory Atividade.fromMap(Map<String, dynamic> map) {
+  factory Atividade.fromJson(Map<String, dynamic> json) {
     return Atividade(
-      id: map['id'],
-      nome: map['nome'] ?? "Nome não disponível",
-      descricao: map['descricao'] ?? "Descrição não disponível",
-      local: map['local'] ?? "Local não disponível",
-      bloco: map['bloco'] ?? "Bloco nao especificado",
-      palestrantes: (map['lista_palestrantes'] as List? ?? []).isEmpty
+      id: json['id'],
+      nome: json['nome'] ?? "Nome não disponível",
+      descricao: json['descricao'] ?? "Descrição não disponível",
+      local: json['local'] ?? "Local não disponível",
+      bloco: json['bloco'] ?? "Bloco nao especificado",
+      palestrantes: (json['lista_palestrantes'] as List? ?? []).singleOrNull
           ? [
               Palestrante(
                   id: 0,
@@ -61,24 +61,24 @@ class Atividade {
                   imagem: "",
                   ordem: 0)
             ]
-          : (map['palestrantes'] as List)
-              .map((palestranteData) => Palestrante.fromMap(palestranteData))
+          : (json['palestrantes'] as List)
+              .map((palestrantes) => Palestrante.fromJson(palestrantes))
               .toList(),
     );
   }
 }
 
 class Bloco {
-  final int? id;
-  final String? nome;
-  final int? ordem;
-  final String? cor;
+  final int id;
+  final String nome;
+  final int ordem;
+  final String cor;
 
   Bloco({
-    this.id,
-    this.nome,
-    this.ordem,
-    this.cor,
+    required this.id,
+    required this.nome,
+    required this.ordem,
+    required this.cor,
   });
 
   factory Bloco.fromMap(Map<String, dynamic> map) {
@@ -92,30 +92,30 @@ class Bloco {
 }
 
 class Palestrante {
-  final int? id;
-  final String? nome;
-  final String? empresa;
-  final String? descricao;
-  final String? imagem;
-  final int? ordem;
+  final int id;
+  final String nome;
+  final String empresa;
+  final String descricao;
+  final String imagem;
+  final int ordem;
 
   Palestrante({
-    this.id,
-    this.nome,
-    this.empresa,
-    this.descricao,
-    this.imagem,
-    this.ordem,
+    required this.id,
+    required this.nome,
+    required this.empresa,
+    required this.descricao,
+    required this.imagem,
+    required this.ordem,
   });
 
-  factory Palestrante.fromMap(Map<String, dynamic> map) {
+  factory Palestrante.fromJson(Map<String, dynamic> json) {
     return Palestrante(
-      id: map['id'],
-      nome: map['nome'],
-      empresa: map['empresa'],
-      descricao: map['descricao'],
-      imagem: map['imagem'],
-      ordem: map['ordem'],
+      id: json['id'],
+      nome: json['nome'],
+      empresa: json['empresa'],
+      descricao: json['descricao'],
+      imagem: json['imagem'],
+      ordem: json['ordem'],
     );
   }
 }

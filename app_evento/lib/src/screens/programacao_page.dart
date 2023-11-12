@@ -3,13 +3,25 @@ import 'package:app_evento/src/apis/programacao_api.dart';
 import 'package:flutter/material.dart';
 import 'package:app_evento/src/stores/programacao_store.dart';
 
-class ProgramacaoPage extends StatelessWidget {
+class ProgramacaoPage extends StatefulWidget {
+  @override
+  _ProgramacaoPageState createState() => _ProgramacaoPageState();
+}
+
+class _ProgramacaoPageState extends State<ProgramacaoPage> {
   final ProgramacaoStore programacaoStore =
       ProgramacaoStore(programacao: Programacao(client: HttpClient()));
 
   @override
+  void initState() {
+    super.initState();
+    programacaoStore.getHorarios();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
+    return Scaffold(
+        body: AnimatedBuilder(
       animation: Listenable.merge([
         programacaoStore.erro,
         programacaoStore.isloading,
@@ -64,7 +76,7 @@ class ProgramacaoPage extends StatelessWidget {
                     title: Text(
                       item.atividade.nome,
                       style: const TextStyle(
-                        color: Colors.black,
+                        color: Colors.pink,
                         fontWeight: FontWeight.w600,
                         fontSize: 24,
                       ),
@@ -99,6 +111,6 @@ class ProgramacaoPage extends StatelessWidget {
           );
         }
       },
-    );
+    ));
   }
 }

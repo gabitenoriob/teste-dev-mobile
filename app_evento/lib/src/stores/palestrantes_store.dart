@@ -1,24 +1,25 @@
-import 'package:app_evento/src/apis/programacao_api.dart';
+import 'package:app_evento/src/apis/palestrantes_api.dart';
 import 'package:app_evento/src/http/exceptions.dart';
-import 'package:app_evento/src/models/programacao_model.dart';
+import 'package:app_evento/src/models/palestrantes_model.dart';
 import 'package:flutter/material.dart';
 
-class ProgramacaoStore {
-  final IProgramacao programacao;
+class PalestrantesStore {
+  final IPalestrantes palestrantes;
 
   // loading
   final ValueNotifier<bool> isloading = ValueNotifier<bool>(false);
 
   // state
-  final ValueNotifier<List<Horarios>> state = ValueNotifier<List<Horarios>>([]);
+  final ValueNotifier<List<Palestrantes>> state =
+      ValueNotifier<List<Palestrantes>>([]);
 
   // erro
   final ValueNotifier<String> erro = ValueNotifier<String>('');
 
-  ProgramacaoStore({required this.programacao});
+  PalestrantesStore({required this.palestrantes});
 
   // Método para atualizar o estado
-  void updateState(List<Horarios> newState) {
+  void updateState(List<Palestrantes> newState) {
     state.value = newState;
   }
 
@@ -27,10 +28,10 @@ class ProgramacaoStore {
     erro.value = '';
   }
 
-  Future<void> getHorarios() async {
+  Future<void> getPalestrantes() async {
     isloading.value = true;
     try {
-      final result = await programacao.getHorarios();
+      final result = await palestrantes.getPalestrantes();
       updateState(result);
       clearError();
     } on NotFoundException catch (e) {
