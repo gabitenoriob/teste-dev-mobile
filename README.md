@@ -22,7 +22,6 @@ Meu app para Eventos é uma aplicação móvel desenvolvida em Flutter que forne
 1. Clone este repositório: `git clone https://github.com/gabitenoriob/teste-dev-mobile.git`
 2. Navegue até o diretório do projeto: `cd teste-dev-mobile`
 3. Instale as dependências: `flutter pub get`
-4. Instale o APK no diretório: 'build\app\outputs\flutter-apk\app-release.apk'
 
 ## Uso
 1. Execute o aplicativo em um emulador ou dispositivo: `flutter run`
