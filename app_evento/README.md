@@ -1,16 +1,38 @@
-# app_evento
+# Eventos APP
 
-A new Flutter project.
+## Descrição
+Meu app para Eventos é uma aplicação móvel desenvolvida em Flutter que fornece informações essenciais sobre determinado evento, como sua programação. Nessa aplicação foi consumido dados de uma API em qual o evento era no ramo de Direito.
 
-## Getting Started
+## Tecnologias Utilizadas
+- Flutter 3.13 Stable
+- Dart
+- Bibliotecas adicionais: Http.dart, dart.convert , material.dart
 
-This project is a starting point for a Flutter application.
+## Funcionalidades Principais
+- Visualização de informações sobre eventos.
+- Listagem de palestrantes com detalhes.
+- Exibição de parceiros e seus dados.
+- Calendário com programações de eventos, incluindo data e local.
 
-A few resources to get you started if this is your first Flutter project:
+## Pré-Requisitos
+- Flutter SDK instalado.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Instalação
+1. Clone este repositório: `git clone https://github.com/gabitenoriob/teste-dev-mobile.git`
+2. Navegue até o diretório do projeto: `cd teste-dev-mobile`
+3. Instale as dependências: `flutter pub get`
+4. Instale o APK no diretório: 'build\app\outputs\flutter-apk\app-release.apk'
+
+## Uso
+1. Execute o aplicativo em um emulador ou dispositivo: `flutter run`
+2. Navegue pelo aplicativo para acessar informações sobre eventos, palestrantes e programações.
+3. Interaja com os elementos da interface para explorar as funcionalidades.
+
+
+
+## Contribuição
+- Para relatar problemas, abra uma [Issue](https://github.com/gabitenoriob/teste-dev-mobile.git/issues).
+- Para contribuir com código, siga o processo de Pull Request.
+
+

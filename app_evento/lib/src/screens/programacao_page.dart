@@ -9,12 +9,14 @@ class ProgramacaoPage extends StatefulWidget {
 }
 
 class _ProgramacaoPageState extends State<ProgramacaoPage> {
+  // Criando uma instância do ProgramacaoStore para gerenciar os dados da programação
   final ProgramacaoStore programacaoStore =
       ProgramacaoStore(programacao: Programacao(client: HttpClient()));
 
   @override
   void initState() {
     super.initState();
+    // Ao iniciar a tela, carrega os horários da programação
     programacaoStore.getHorarios();
   }
 
@@ -22,6 +24,7 @@ class _ProgramacaoPageState extends State<ProgramacaoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBuilder(
+        // Atualiza a interface com base nas mudanças no estado do ProgramacaoStore
         animation: Listenable.merge([
           programacaoStore.erro,
           programacaoStore.isloading,
@@ -29,9 +32,11 @@ class _ProgramacaoPageState extends State<ProgramacaoPage> {
         ]),
         builder: (context, child) {
           if (programacaoStore.isloading.value) {
+            // Exibe um indicador de carregamento enquanto os dados estão sendo buscados
             return const Center(child: CircularProgressIndicator());
           }
           if (programacaoStore.erro.value.isNotEmpty) {
+            // Exibe uma mensagem de erro se ocorrer um erro no carregamento
             return Center(
               child: Text(
                 programacaoStore.erro.value,
@@ -45,6 +50,7 @@ class _ProgramacaoPageState extends State<ProgramacaoPage> {
             );
           }
           if (programacaoStore.state.value.isEmpty) {
+            // Exibe uma mensagem se a lista de programação estiver vazia
             return Center(
               child: Text(
                 'Nenhum item na lista de programação',
@@ -57,24 +63,18 @@ class _ProgramacaoPageState extends State<ProgramacaoPage> {
               ),
             );
           } else {
+            // Cria uma lista de horários da programação
             return ListView.builder(
               itemCount: programacaoStore.state.value!.length,
               itemBuilder: (context, index) {
                 final item = programacaoStore.state.value![index];
-                final atividade = item.atividade;
                 final nomeAtividade = item.atividade.nome;
-                final descricaoAtividade = item.atividade.descricao;
                 final horaAtividade = item.horaInicio;
-                final dataAtividade = item.dataAtividade;
                 final localAtividade = item.atividade.local.toString();
-                final listaPalestrantes = item.listaPalestrantes;
 
                 return Card(
-                
-                  margin:
-                      const EdgeInsets.all(16),
+                  margin: const EdgeInsets.all(16),
                   child: Padding(
-                    
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,15 +96,7 @@ class _ProgramacaoPageState extends State<ProgramacaoPage> {
                             fontSize: 18,
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        /*Text(
-                          'Data: $dataAtividade',
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        ),*/
+
                         const SizedBox(height: 8),
                         Text(
                           'Local: $localAtividade',

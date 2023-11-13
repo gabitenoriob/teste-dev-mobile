@@ -11,15 +11,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Image? _image;
+  Image? _image; // Variável para armazenar a imagem carregada.
 
   @override
   void initState() {
     super.initState();
-    loadImage();
+    loadImage(); // Carrega a imagem ao inicializar a tela.
   }
 
-//gerando imagem da home
+  // Função assíncrona para carregar a imagem da web.
   Future<void> loadImage() async {
     final response = await http.get(Uri.parse(
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9uBCZIGEtt5x_8lqHg_n8ZQO8rGn4HgrfaWx3za623-BCV6YYSxQjU_1U_iE5nukGlLc&usqp=CAU'));
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final imageBytes = response.bodyBytes;
       final image = Image.memory(Uint8List.fromList(imageBytes));
       setState(() {
-        _image = image;
+        _image = image; // Atualiza o estado com a imagem carregada.
       });
     }
   }
@@ -36,12 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Congresso Direito em Alagoas'),
+        title: Text('Congresso Direito em Alagoas'), // Título da AppBar.
         actions: [
           IconButton(
             icon: Icon(Icons.menu),
             onPressed: () {
-              // menu..
             },
           ),
         ],
@@ -82,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     },
-                    child: Text('Programação'),
+                    child: Text('Programação'), // Botão de Programação.
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -97,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     },
-                    child: Text('Palestrantes'),
+                    child: Text('Palestrantes'), // Botão de Palestrantes.
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -112,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     },
-                    child: Text('Parceiros'),
+                    child: Text('Parceiros'), // Botão de Parceiros.
                   ),
                 ],
               ),
@@ -120,6 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      //ConteudoApi:
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -127,19 +127,16 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               icon: Icon(Icons.phone),
               onPressed: () {
-                // Iredes sociais do conteudo
               },
             ),
             IconButton(
               icon: Icon(Icons.email),
               onPressed: () {
-                // conteudo
               },
             ),
             IconButton(
               icon: Icon(Icons.location_on),
               onPressed: () {
-                // conteudo
               },
             ),
           ],

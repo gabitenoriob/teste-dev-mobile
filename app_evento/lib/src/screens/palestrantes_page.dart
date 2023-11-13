@@ -9,12 +9,13 @@ class PalestrantesPage extends StatefulWidget {
 }
 
 class _PalestrantesPageState extends State<PalestrantesPage> {
-  final PalestrantesStore palestrantesStore =
-      PalestrantesStore(palestrantes: Palestrante(client: HttpClient()));
+  // Criando uma instância do PalestrantesStore para gerenciar os dados dos palestrantes
+  final PalestrantesStore palestrantesStore = PalestrantesStore(palestrantes: Palestrante(client: HttpClient()));
 
   @override
   void initState() {
     super.initState();
+    // Ao iniciar a tela, carrega os palestrantes
     palestrantesStore.getPalestrantes();
   }
 
@@ -22,6 +23,7 @@ class _PalestrantesPageState extends State<PalestrantesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBuilder(
+        // Atualiza a interface com base nas mudanças no estado do PalestrantesStore
         animation: Listenable.merge([
           palestrantesStore.erro,
           palestrantesStore.isloading,
@@ -29,9 +31,11 @@ class _PalestrantesPageState extends State<PalestrantesPage> {
         ]),
         builder: (context, child) {
           if (palestrantesStore.isloading.value) {
+            // Exibe um indicador de carregamento enquanto os dados estão sendo buscados
             return const Center(child: CircularProgressIndicator());
           }
           if (palestrantesStore.erro.value.isNotEmpty) {
+            // Exibe uma mensagem de erro se ocorrer um erro no carregamento
             return Center(
               child: Text(
                 palestrantesStore.erro.value,
@@ -46,6 +50,7 @@ class _PalestrantesPageState extends State<PalestrantesPage> {
           }
 
           if (palestrantesStore.state.value.isEmpty) {
+            // Exibe uma mensagem se a lista de palestrantes estiver vazia
             return Center(
               child: Text(
                 'Nenhum item na lista de palestrantes',
@@ -58,6 +63,7 @@ class _PalestrantesPageState extends State<PalestrantesPage> {
               ),
             );
           } else {
+            // Cria uma lista de palestrantes
             return ListView.separated(
               separatorBuilder: (context, index) => const SizedBox(
                 height: 32,
@@ -76,8 +82,7 @@ class _PalestrantesPageState extends State<PalestrantesPage> {
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.white, // Cor de fundo da "caixa"
-                      borderRadius:
-                          BorderRadius.circular(16), // Borda arredondada
+                      borderRadius: BorderRadius.circular(16), // Borda arredondada
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),

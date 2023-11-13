@@ -9,12 +9,13 @@ class ParceirosPage extends StatefulWidget {
 }
 
 class _ParceirosPageState extends State<ParceirosPage> {
-  final ParceirosStore parceirosStore =
-      ParceirosStore(parceiros: Parceiro(client: HttpClient()));
+  // Criando uma instância do ParceirosStore para gerenciar os dados dos parceiros
+  final ParceirosStore parceirosStore = ParceirosStore(parceiros: Parceiro(client: HttpClient()));
 
   @override
   void initState() {
     super.initState();
+    // Ao iniciar a tela, carrega os parceiros
     parceirosStore.getParceiros();
   }
 
@@ -22,6 +23,7 @@ class _ParceirosPageState extends State<ParceirosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBuilder(
+        // Atualiza a interface com base nas mudanças no estado do ParceirosStore
         animation: Listenable.merge([
           parceirosStore.erro,
           parceirosStore.isloading,
@@ -29,9 +31,11 @@ class _ParceirosPageState extends State<ParceirosPage> {
         ]),
         builder: (context, child) {
           if (parceirosStore.isloading.value) {
+            // Exibe um indicador de carregamento enquanto os dados estão sendo buscados
             return const Center(child: CircularProgressIndicator());
           }
           if (parceirosStore.erro.value.isNotEmpty) {
+            // Exibe uma mensagem de erro se ocorrer um erro no carregamento
             return Center(
               child: Text(
                 parceirosStore.erro.value,
@@ -46,6 +50,7 @@ class _ParceirosPageState extends State<ParceirosPage> {
           }
 
           if (parceirosStore.state.value.isEmpty) {
+            // Exibe uma mensagem se a lista de parceiros estiver vazia
             return Center(
               child: Text(
                 'Nenhum item na lista de parceiros',
@@ -58,6 +63,7 @@ class _ParceirosPageState extends State<ParceirosPage> {
               ),
             );
           } else {
+            // Cria uma lista de parceiros
             return ListView.separated(
               separatorBuilder: (context, index) => const SizedBox(
                 height: 32,
@@ -75,8 +81,7 @@ class _ParceirosPageState extends State<ParceirosPage> {
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.white, 
-                      borderRadius:
-                          BorderRadius.circular(16), 
+                      borderRadius: BorderRadius.circular(16), 
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
